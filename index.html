@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Marketing Cost Estimator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('house.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .highlight-text {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #059669;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            line-height: 1.4;
+            padding: 0.5rem;
+            background: linear-gradient(45deg, #d1fae5, #a7f3d0);
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        .total-cost {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #1e40af;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 bg-opacity-75 p-4">
+    <div class="max-w-md mx-auto bg-white bg-opacity-90 p-6 rounded-lg shadow-md">
+        <img src="logo.png" alt="Agent Whisperer Logo" class="h-48 mb-2 mx-auto">
+        <h1 class="text-2xl font-bold text-blue-600 text-center mb-1">Marketing Cost SAVINGS Estimator</h1>
+        <p class="text-sm font-semibold mb-1">Pick which marketing tools your real estate agent will use to sell your house:</p>
+        
+        <form id="costForm" class="space-y-1">
+            <div>
+                <label class="block text-sm font-medium">Photography:</label>
+                <select name="photography" class="w-full p-1 border rounded text-sm">
+                    <option value="0">None</option>
+                    <option value="300">Professional Stills ($300)</option>
+                    <option value="1000">Stills, Video, 3D, Drone ($1000)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Signage:</label>
+                <select name="signage" class="w-full p-1 border rounded text-sm">
+                    <option value="0">None</option>
+                    <option value="500">Large ($500)</option>
+                    <option value="300">Medium ($300)</option>
+                    <option value="150">Small ($150)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Realestate.com.au Listing:</label>
+                <select name="listing" class="w-full p-1 border rounded text-sm">
+                    <option value="0">Standard (Free)</option>
+                    <option value="695">Feature ($695)</option>
+                    <option value="1200">Highlight ($1200)</option>
+                    <option value="2500">Premiere ($2500)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Flyers ($100 per 1000):</label>
+                <input type="number" name="flyers" min="0" value="0" class="w-full p-1 border rounded text-sm" placeholder="Enter quantity (in thousands)">
+            </div>
+
+            <div>
+                <label class="flex items-center text-sm">
+                    <input type="checkbox" name="auctioneer" value="750" class="mr-2">
+                    Auctioneer ($750)
+                </label>
+            </div>
+
+            <div>
+                <label class="flex items-center text-sm">
+                    <input type="checkbox" name="social" value="300" class="mr-2">
+                    Social Media Campaign ($300)
+                </label>
+            </div>
+
+            <div>
+                <label class="flex items-center text-sm">
+                    <input type="checkbox" name="openhouse" value="500" class="mr-2">
+                    Open House Staging ($500)
+                </label>
+            </div>
+        </form>
+
+        <div class="mt-2">
+            <p class="total-cost">Total Cost: $<span id="total">5850</span></p>
+            <p class="highlight-text mt-2">All included FREE when you use with Agent Whisperer in conjunction and your preferred Real Estate Agent!</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('costForm');
+        const totalSpan = document.getElementById('total');
+
+        form.addEventListener('change', updateTotal);
+        form.addEventListener('input', updateTotal);
+
+        function updateTotal() {
+            let total = 0;
+
+            total += parseInt(form.photography.value) || 0;
+            total += parseInt(form.signage.value) || 0;
+            total += parseInt(form.listing.value) || 0;
+            total += (parseInt(form.flyers.value) || 0) * 100;
+            total += form.auctioneer.checked ? parseInt(form.auctioneer.value) : 0;
+            total += form.social.checked ? parseInt(form.social.value) : 0;
+            total += form.openhouse.checked ? parseInt(form.openhouse.value) : 0;
+
+            totalSpan.textContent = total.toLocaleString();
+        }
+    </script>
+</body>
+</html>
