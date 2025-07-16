@@ -1,131 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Estate Marketing Cost Estimator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-image: url('house.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .highlight-text {
-            font-size: 1.25rem;
-            font-weight: 900;
-            color: #059669;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            line-height: 1.4;
-            padding: 0.5rem;
-            background: linear-gradient(45deg, #d1fae5, #a7f3d0);
-            border-radius: 0.5rem;
-            text-align: center;
-        }
-        .total-cost {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #1e40af;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        .agent-whisperer {
-            font-style: italic;
-            color: #d97706;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real Estate Marketing Savings Estimator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url('house.png');
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: contain;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #f0f4f8;
+      position: relative;
+    }
+
+    .logo-fixed {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      left: auto;
+      height: 100px;
+      z-index: 20;
+    }
+
+    .container {
+      position: absolute;
+      top: 20%;
+      left: 0.75rem;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      width: 95%;
+      max-width: 360px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1d4ed8;
+      text-align: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .subheading {
+      font-size: 0.85rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #374151;
+    }
+
+    .highlight-text {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #059669;
+      margin-top: 0.75rem;
+      background: #d1fae5;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    .total-saving {
+      font-weight: bold;
+      color: #1e3a8a;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    label {
+      font-size: 0.9rem;
+    }
+
+    /* Desktop and iPad adjustments (do NOT affect mobile) */
+    @media (min-width: 601px) {
+      body {
+        background-image: url('house2.png');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .logo-fixed {
+        height: 120px;
+        top: 2rem;
+        right: 2rem;
+        left: auto;
+      }
+
+      .container {
+        width: 360px !important;
+        left: 2rem !important;
+        right: auto !important;
+        margin: 0 !important;
+      }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      .logo-fixed {
+        height: 80px;
+        top: 0.75rem;
+        right: 0.75rem;
+        left: auto;
+      }
+
+      .container {
+        top: 20%;
+        left: 0.5rem;
+        width: 50% !important;
+        max-width: none !important;
+        transform: none !important;
+        border-radius: 1rem;
+      }
+
+      h1 {
+        font-size: 1rem;
+      }
+
+      .subheading {
+        font-size: 0.75rem;
+      }
+
+      .highlight-text {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 bg-opacity-75 p-4">
-    <div class="max-w-md mx-auto bg-white bg-opacity-90 p-6 rounded-lg shadow-md">
-        <img src="logo.png" alt="Agent Whisperer Logo" class="h-48 mb-2 mx-auto">
-        <h1 class="text-2xl font-bold text-blue-600 text-center mb-1">Marketing Cost SAVINGS Estimator</h1>
-        <p class="text-sm font-semibold mb-1">Pick which marketing tools your real estate agent will use to sell your house:</p>
-        
-        <form id="costForm" class="space-y-1">
-            <div>
-                <label class="block text-sm font-medium">Photography:</label>
-                <select name="photography" class="w-full p-1 border rounded text-sm">
-                    <option value="0">None</option>
-                    <option value="300">Professional Stills ($300)</option>
-                    <option value="1000">Stills, Video, 3D, Drone ($1000)</option>
-                </select>
-            </div>
+<body>
+  <img src="logo.png" alt="Agent Whisperer Logo" class="logo-fixed" />
 
-            <div>
-                <label class="block text-sm font-medium">Signage:</label>
-                <select name="signage" class="w-full p-1 border rounded text-sm">
-                    <option value="0">None</option>
-                    <option value="500">Large ($500)</option>
-                    <option value="300">Medium ($300)</option>
-                    <option value="150">Small ($150)</option>
-                </select>
-            </div>
+  <div class="container">
+    <h1>Marketing Savings</h1>
+    <p class="subheading">(select marketing tools)</p>
 
-            <div>
-                <label class="block text-sm font-medium">Realestate.com.au Listing:</label>
-                <select name="listing" class="w-full p-1 border rounded text-sm">
-                    <option value="0">Standard (Free)</option>
-                    <option value="695">Feature ($695)</option>
-                    <option value="1200">Highlight ($1200)</option>
-                    <option value="2500">Premiere ($2500)</option>
-                </select>
-            </div>
+    <form id="costForm" class="space-y-3">
+      <div>
+        <label class="flex items-center">
+          <input type="checkbox" name="photo" value="1000" class="mr-2" />
+          Photography incl video and drone ($1000)
+        </label>
+      </div>
 
-            <div>
-                <label class="block text-sm font-medium">Flyers ($100 per 1000):</label>
-                <input type="number" name="flyers" min="0" value="0" class="w-full p-1 border rounded text-sm" placeholder="Enter quantity (in thousands)">
-            </div>
+      <div>
+        <label class="flex items-center">
+          <input type="checkbox" name="signage" value="750" class="mr-2" />
+          Signage ($750)
+        </label>
+      </div>
 
-            <div>
-                <label class="flex items-center text-sm">
-                    <input type="checkbox" name="auctioneer" value="750" class="mr-2">
-                    Auctioneer ($750)
-                </label>
-            </div>
+      <div>
+        <label class="flex items-center">
+          <input type="checkbox" name="listing" value="1200" class="mr-2" />
+          Realestate.com.au listing ($1200)
+        </label>
+      </div>
 
-            <div>
-                <label class="flex items-center text-sm">
-                    <input type="checkbox" name="social" value="300" class="mr-2">
-                    Social Media Campaign ($300)
-                </label>
-            </div>
+      <div>
+        <label class="flex items-center">
+          <input type="checkbox" name="flyers" value="400" class="mr-2" />
+          Flyers ($400)
+        </label>
+      </div>
 
-            <div>
-                <label class="flex items-center text-sm">
-                    <input type="checkbox" name="openhouse" value="500" class="mr-2">
-                    Open House Staging ($500)
-                </label>
-            </div>
-        </form>
+      <div>
+        <label class="flex items-center">
+          <input type="checkbox" name="auctioneer" value="750" class="mr-2" />
+          Auctioneer ($750)
+        </label>
+      </div>
 
-        <div class="mt-2">
-            <p class="total-cost">Total Cost: $<span id="total">0</span></p>
-            <p class="highlight-text mt-2">All included FREE when you use the <span class="agent-whisperer">Agent Whisperer</span> in conjunction WITH your preferred Real Estate Agent!</p>
-        </div>
+      <div>
+        <label class="flex items-center">
+          <input type="checkbox" name="social" value="300" class="mr-2" />
+          Social Media Campaign ($300)
+        </label>
+      </div>
+
+      <div>
+        <label class="flex items-center">
+          <input type="checkbox" name="openhouse" value="500" class="mr-2" />
+          Open House Staging ($500)
+        </label>
+      </div>
+    </form>
+
+    <div class="text-center mt-3">
+      <p class="total-saving">Total Saving: $<span id="total">0</span></p>
+      <p class="highlight-text">All included FREE when you use Agent Whisperer with your preferred agent!</p>
     </div>
+  </div>
 
-    <script>
-        const form = document.getElementById('costForm');
-        const totalSpan = document.getElementById('total');
+  <script>
+    const form = document.getElementById('costForm');
+    const totalSpan = document.getElementById('total');
 
-        form.addEventListener('change', updateTotal);
-        form.addEventListener('input', updateTotal);
+    form.addEventListener('change', updateTotal);
 
-        function updateTotal() {
-            let total = 0;
-
-            total += parseInt(form.photography.value) || 0;
-            total += parseInt(form.signage.value) || 0;
-            total += parseInt(form.listing.value) || 0;
-            total += (parseInt(form.flyers.value) || 0) * 100;
-            total += form.auctioneer.checked ? parseInt(form.auctioneer.value) : 0;
-            total += form.social.checked ? parseInt(form.social.value) : 0;
-            total += form.openhouse.checked ? parseInt(form.openhouse.value) : 0;
-
-            totalSpan.textContent = total.toLocaleString();
-        }
-    </script>
+    function updateTotal() {
+      let total = 0;
+      const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(cb => {
+        if (cb.checked) total += parseInt(cb.value);
+      });
+      totalSpan.textContent = total.toLocaleString();
+    }
+  </script>
 </body>
 </html>
